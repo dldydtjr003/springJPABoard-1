@@ -6,8 +6,6 @@ import com.board.domain.Board;
 
 public interface BoardService {
 
-	//2. interface로 curd 서비스 생성
-
 	public int register(Board board) throws Exception; 
 	public Board read(Board board) throws Exception; 
 	public int modify(Board board) throws Exception; 

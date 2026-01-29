@@ -13,8 +13,6 @@ import com.board.domain.Board;
 import com.board.service.BoardService;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 
@@ -62,8 +60,9 @@ public class BoardController {
 		try {
 			Board board = boardService.read(b);
 			if(board != null) {
-				model.addAttribute("message","상세정보 조회 완료되었습니다.");
-				return "board/success";
+				model.addAttribute("board",board);
+				model.addAttribute("message","상세정보 조회 성공했습니다.");
+				return "board/detail";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -71,7 +70,7 @@ public class BoardController {
 		model.addAttribute("message","상세정보 조회 실패했습니다.");
 		return "board/failed";
 	}
-	@PostMapping("/delete")
+	@GetMapping("/delete")
 	public String boardDelete(Model model, Board board) {
 		int count;
 		try {
@@ -93,7 +92,7 @@ public class BoardController {
 			board = boardService.read(b);
 			if(board != null) {
 				model.addAttribute("board",board);
-				return "board/success";
+				return "board/updateForm";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
